@@ -36,9 +36,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA00FA98-7C14-470F-8079-6757DE68D16E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRListener", "SignalRListener\SignalRListener.csproj", "{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRListener", "SignalRListener\SignalRListener.csproj", "{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
