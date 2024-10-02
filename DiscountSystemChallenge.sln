@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{40DD42
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{A48CF63A-210D-47F4-938B-851A4DFC6B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataFileIO", "DataFileIO\DataFileIO.csproj", "{651D8254-D975-43F9-BBFA-08945CBE957A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataFileIO", "DataFileIO\DataFileIO.csproj", "{651D8254-D975-43F9-BBFA-08945CBE957A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Middleware", "03.Middleware", "{C8CC52DF-2719-46FA-A57A-41E31BAF077F}"
 EndProject
@@ -31,7 +31,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRDiscountCodeApp", "S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.Client", "04.Client", "{E2DA9003-F4C8-4FAE-8540-C012CD1C74DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{AF8C44FB-9D91-43CB-8DD4-5A7CC7108F68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{AF8C44FB-9D91-43CB-8DD4-5A7CC7108F68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA00FA98-7C14-470F-8079-6757DE68D16E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRListener", "SignalRListener\SignalRListener.csproj", "{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +74,10 @@ Global
 		{AF8C44FB-9D91-43CB-8DD4-5A7CC7108F68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF8C44FB-9D91-43CB-8DD4-5A7CC7108F68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF8C44FB-9D91-43CB-8DD4-5A7CC7108F68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +92,7 @@ Global
 		{651D8254-D975-43F9-BBFA-08945CBE957A} = {A48CF63A-210D-47F4-938B-851A4DFC6B53}
 		{288E4F36-952A-41F9-8729-2C3DF2C9BC12} = {C8CC52DF-2719-46FA-A57A-41E31BAF077F}
 		{AF8C44FB-9D91-43CB-8DD4-5A7CC7108F68} = {E2DA9003-F4C8-4FAE-8540-C012CD1C74DC}
+		{085BD7FC-82D3-423A-AE9A-CDFCADA9B4E3} = {E2DA9003-F4C8-4FAE-8540-C012CD1C74DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BBEEBEA-626C-45BC-9CF4-6BB082CF16F9}

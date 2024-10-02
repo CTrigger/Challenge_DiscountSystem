@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using DiscountCore;
 using DiscountServices.Interfaces;
-using DiscountCore;
+using Microsoft.AspNetCore.SignalR;
+using SignalRDiscountCodeApp.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 namespace SignalRDiscountCodeApp
 {
-    public sealed class DiscountHub : Hub
+    public sealed class DiscountHub : Hub<IDiscountClient>
     {
         private readonly IDiscountManager _discountManager;
 
@@ -15,20 +19,20 @@ namespace SignalRDiscountCodeApp
         public override async Task OnConnectedAsync()
         {
 
-            await Clients.All.SendAsync("DiscountCodes", $"{Context.ConnectionId} has joined");
+            await Clients.All.ReceiveMessage($"{Context.ConnectionId} has joined");
         }
 
-
-        public async Task<IEnumerable<DiscountData>> GenerateDiscountCodes(ushort batch)
+        public async Task GenerateCodes(ushort batch)
         {
+            IEnumerable<DiscountData> codes;
             if (batch == 0)
-            {
-                return Enumerable.Empty<DiscountData>();
-            }
+                codes = Enumerable.Empty<DiscountData>();
+            else
+                codes = await _discountManager.GenerateDiscountCode(batch);
+            await Clients.All.BroadcastCodes(codes);
 
-            IEnumerable<DiscountData> codes = await _discountManager.GenerateDiscountCode(batch);
-            return codes;  // Return the result to the client
-            //return await Task.FromResult(codes);  // Return the result to the client
         }
+
     }
 }
+
