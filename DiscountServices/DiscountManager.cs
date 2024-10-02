@@ -1,14 +1,6 @@
 ﻿using DiscountCore;
 using DiscountServices.Interfaces;
-using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 using FileManager.Interfaces;
-using FileManager;
 namespace DiscountServices
 {
     public class DiscountManager : IDiscountManager
@@ -31,7 +23,7 @@ namespace DiscountServices
         public async Task<DiscountData> GenerateDiscountCode()
         {
             throw new NotImplementedException();
-         //   return await GenerateDiscountCode(1).Result.First();
+            //   return await GenerateDiscountCode(1).Result.First();
         }
 
         public async Task<IEnumerable<DiscountData>> GenerateDiscountCode(ushort batch)
