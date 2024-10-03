@@ -16,10 +16,10 @@ namespace DiscountSystemChallenge
         {
             var fileIO =
                 new Mock<DataFileIO.FileIO>();
-                //Mock.Of<DataFileIO.FileIO>();
-            var dataHandler = 
+            //Mock.Of<DataFileIO.FileIO>();
+            var dataHandler =
                 new Mock<FileManager.DataHandler>(fileIO.Object);
-                //Mock.Of<FileManager.DataHandler>();
+            //Mock.Of<FileManager.DataHandler>();
             dataHandler
                 .Setup(dh => dh.LoadData())
                 .Verifiable();
@@ -31,24 +31,28 @@ namespace DiscountSystemChallenge
         [SetUp]
         public void Setup()
         {
-          
+
         }
         #endregion
         #region Test
-        [Test,NonParallelizable]
-        [TestCase("1")]
-        [TestCase("20")]
-        [TestCase("2000")]
-        [TestCase("20000")]
+        [Test, NonParallelizable]
+        [TestCase("1", "7")]
+        [TestCase("20", "7")]
+        [TestCase("2000", "7")]
+        [TestCase("20000", "7")]
+        [TestCase("1", "8")]
+        [TestCase("20", "8")]
+        [TestCase("2000", "8")]
+        [TestCase("20000", "8")]
         //[TestCase("65535")]//Need trouble shoot (race condition problem)
-        public void GenerateDiscounts(ushort batches)
+        public void GenerateDiscounts(ushort batches, byte length)
         {
             int real_total = 0;
             int distinct_total = 0;
             Assert.DoesNotThrow(() =>
             {
                 IEnumerable<DiscountData> results;
-                results = Task.Run( ()=>_discountManager.GenerateDiscountCode(batches)).Result;
+                results = Task.Run(() => _discountManager.GenerateDiscountCode(batches, length)).Result;
                 real_total = results.Count();
                 distinct_total = results.DistinctBy(x => x.Code).Count();
             });

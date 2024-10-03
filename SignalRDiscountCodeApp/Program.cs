@@ -36,7 +36,7 @@ internal class Program
         }
 
         // Add MapPost for SignalR method invocation
-        app.MapPost("/generate-codes", async (ushort batch,
+        app.MapPost("/generate-codes", async (ushort batch, byte length,
             IHubContext<DiscountHub, IDiscountClient> hubContext,
             ISwaggerHelper swaggerHelper) =>
         {
@@ -44,7 +44,7 @@ internal class Program
                 return Results.BadRequest("Batch size cannot be zero.");
 
             await hubContext.Clients.All.ReceiveMessage($"Batch request from Swagger: {batch} codes.");
-            var discountList = await swaggerHelper.SwaggerDiscount(batch);
+            var discountList = await swaggerHelper.SwaggerDiscount(batch, length);
 
             await hubContext.Clients.All.BroadcastCodes(discountList);
 

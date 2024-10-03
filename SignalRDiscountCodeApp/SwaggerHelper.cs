@@ -15,13 +15,13 @@ namespace SignalRDiscountCodeApp
         {
             _discountManager = discountManager;
         }
-        public async Task<IEnumerable<DiscountData>> SwaggerDiscount(ushort batch)
+        public async Task<IEnumerable<DiscountData>> SwaggerDiscount(ushort batch, byte length)
         {
             IEnumerable<DiscountData> codes;
             if (batch == 0)
                 codes = Enumerable.Empty<DiscountData>();
 
-            codes = await _discountManager.GenerateDiscountCode(batch);
+            codes = await _discountManager.GenerateDiscountCode(batch, length);
             return codes;
         }
     }

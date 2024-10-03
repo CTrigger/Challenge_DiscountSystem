@@ -26,7 +26,7 @@ namespace DiscountServices
             //   return await GenerateDiscountCode(1).Result.First();
         }
 
-        public async Task<IEnumerable<DiscountData>> GenerateDiscountCode(ushort batch)
+        public async Task<IEnumerable<DiscountData>> GenerateDiscountCode(ushort batch, byte length)
         {
             if (batch == 0)
                 return Enumerable.Empty<DiscountData>();
@@ -55,6 +55,22 @@ namespace DiscountServices
             _repository.DiscountRepository = _repository.DiscountRepository.Concat(result);
             await _repository.SaveData_DiscountContract();
             return result;
+        }
+
+        public async Task<byte> UseCode(string code)
+        {
+            try
+            {
+                if (await _repository.CodeUse(code))
+                    return (byte)CodeUseEnum.Success;
+                else
+                    return (byte)CodeUseEnum.InvalidCode;
+
+            }
+            catch
+            {
+                return (byte)CodeUseEnum.Error;
+            }
         }
         #endregion
 

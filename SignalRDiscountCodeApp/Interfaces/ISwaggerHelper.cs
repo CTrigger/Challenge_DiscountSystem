@@ -6,6 +6,6 @@ namespace SignalRDiscountCodeApp.Interfaces
 {
     public interface ISwaggerHelper
     {
-        Task<IEnumerable<DiscountData>> SwaggerDiscount(ushort batch);
+        Task<IEnumerable<DiscountData>> SwaggerDiscount(ushort batch, byte length);
     }
 }

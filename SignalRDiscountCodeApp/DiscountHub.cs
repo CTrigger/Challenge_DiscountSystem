@@ -22,15 +22,21 @@ namespace SignalRDiscountCodeApp
             await Clients.All.ReceiveMessage($"{Context.ConnectionId} has joined");
         }
 
-        public async Task GenerateCodes(ushort batch)
+        public async Task GenerateCodes(ushort batch, byte length)
         {
             IEnumerable<DiscountData> codes;
             if (batch == 0)
                 codes = Enumerable.Empty<DiscountData>();
             else
-                codes = await _discountManager.GenerateDiscountCode(batch);
+                codes = await _discountManager.GenerateDiscountCode(batch, length);
             await Clients.All.BroadcastCodes(codes);
 
+        }
+
+        public async Task CodeUsage(string code)
+        {
+
+            throw new KeyNotFoundException();
         }
 
     }
