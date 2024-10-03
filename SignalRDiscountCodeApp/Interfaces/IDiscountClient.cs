@@ -9,5 +9,6 @@ namespace SignalRDiscountCodeApp.Interfaces
         Task BroadcastCodes(IEnumerable<DiscountData> codes);
         Task CodeResponse(byte result);
         Task CodeUsed(string code);
+        Task AllCodes(IEnumerable<DiscountData> codes);
     }
 }

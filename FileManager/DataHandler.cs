@@ -25,6 +25,7 @@ namespace FileManager
         public DataHandler(IFileIO access)
         {
             _access = access;
+            DiscountRepository = Enumerable.Empty<DiscountData>();
             LoadData();
         }
         ~DataHandler()
@@ -36,7 +37,7 @@ namespace FileManager
         #region Methods
 
         #region Read
-        internal virtual async Task LoadData()
+        internal virtual async void LoadData()
         {
             await LoadData_DiscountContract();
         }
@@ -58,7 +59,7 @@ namespace FileManager
         #endregion
 
         #region Write
-        public async Task SaveData()
+        public async void SaveData()
         {
             await SaveData_DiscountContract();
         }

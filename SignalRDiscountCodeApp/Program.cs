@@ -22,7 +22,7 @@ internal class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddSingleton<IFileIO, FileIO>();
-        builder.Services.AddTransient<IDataHandler, DataHandler>();
+        builder.Services.AddSingleton<IDataHandler, DataHandler>();
         builder.Services.AddTransient<IDiscountManager, DiscountManager>();
         builder.Services.AddTransient<ISwaggerHelper, SwaggerHelper>(); //this is custom for swagger
         builder.Services.AddSignalR();
@@ -43,10 +43,25 @@ internal class Program
             if (batch == 0)
                 return Results.BadRequest("Batch size cannot be zero.");
 
-            await hubContext.Clients.All.ReceiveMessage($"Batch request from Swagger: {batch} codes.");
+            await hubContext.Clients.All.ReceiveMessage($"Batch request from Swagger: gen {batch} codes.");
             var discountList = await swaggerHelper.SwaggerDiscount(batch, length);
 
             await hubContext.Clients.All.BroadcastCodes(discountList);
+
+            return Results.Ok("Codes have been broadcasted.");
+        });
+
+        app.MapPost("/use-code", async (string code,
+            IHubContext<DiscountHub, IDiscountClient> hubContext,
+            ISwaggerHelper swaggerHelper) =>
+        {
+            if (code.Length < 7 || code.Length > 8)
+                return Results.BadRequest("bad code length");
+
+            await hubContext.Clients.All.ReceiveMessage($"Batch request from Swagger: use {code}.");
+            byte result = await swaggerHelper.SwaggerUseCode(code);
+
+            await hubContext.Clients.All.CodeResponse(result);
 
             return Results.Ok("Codes have been broadcasted.");
         });

@@ -37,7 +37,7 @@ namespace DiscountServices
             IEnumerable<DiscountData> result = new List<DiscountData>();
             do
             {
-                result = (from code in GenerateDistinctCodes(distinct)
+                result = (from code in GenerateDistinctCodes(distinct, length)
                           select code)
                           .Concat(result)
                           .DistinctBy(x => x.Code)
@@ -72,18 +72,22 @@ namespace DiscountServices
                 return (byte)CodeUseEnum.Error;
             }
         }
+        public async Task<IEnumerable<DiscountData>> ListAllCodes()
+        {
+            return await Task.Run(() => { return (from available in _repository.DiscountRepository where !available.IsUsed select available).ToArray(); });
+        }
         #endregion
 
         #region aux
 
-        private IEnumerable<DiscountData> GenerateDistinctCodes(uint batch)
+        private IEnumerable<DiscountData> GenerateDistinctCodes(uint batch, byte length)
         {
             if (batch == 0)
                 yield break;
 
             while (0 < batch--)
             {
-                string code = GetRandomCode();
+                string code = GetRandomCode(length);
                 yield return new DiscountData()
                 {
                     Code = code,
@@ -93,10 +97,10 @@ namespace DiscountServices
             }
 
         }
-        private string GetRandomCode()
+        private string GetRandomCode(byte length)
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());
-            int codeLength = r.Next(7, 9);
+            int codeLength = r.Next(7, length + 1);
             return new string(
                 Enumerable
                     .Range(0, codeLength)

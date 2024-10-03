@@ -24,5 +24,10 @@ namespace SignalRDiscountCodeApp
             codes = await _discountManager.GenerateDiscountCode(batch, length);
             return codes;
         }
+        public async Task<byte> SwaggerUseCode(string code)
+        {
+            byte result = await _discountManager.UseCode(code);
+            return result;
+        }
     }
 }
