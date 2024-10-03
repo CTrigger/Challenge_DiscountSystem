@@ -19,3 +19,4 @@ I'm Ricardo Kim a software engineer.
 
 * The challenge also includes unit testing.
 * I needed to have Visual Studio 2022
+* (extra) there is a swagger request interface (/swagger)
