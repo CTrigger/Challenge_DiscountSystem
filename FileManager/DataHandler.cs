@@ -68,6 +68,19 @@ namespace FileManager
             await _access.SaveFile(DiscountRepositoryPath, data);
         }
 
+        public async Task<bool> CodeUse(string code)
+        {
+            DiscountData filter = DiscountRepository.Where(w => w.Code == code && !w.IsUsed).Single();
+            if (filter == null)
+                return false;
+            else
+            {
+                filter.IsUsed = true;
+                await SaveData_DiscountContract();
+            }
+
+            return true;
+        }
         #endregion
 
         #endregion

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DiscountCore;
+﻿using DiscountCore;
 namespace FileManager.Interfaces
 {
     public interface IDataHandler
@@ -11,5 +6,6 @@ namespace FileManager.Interfaces
         IEnumerable<DiscountData> DiscountRepository { get; set; }
         Task SaveData();
         Task SaveData_DiscountContract();
+        Task<bool> CodeUse(string code);
     }
 }
